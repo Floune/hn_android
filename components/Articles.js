@@ -1,32 +1,36 @@
-import {Button, Linking, StyleSheet, Text, View} from 'react-native';
+import {Button, ImageBackgroundComponent, Linking, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import styled from 'styled-components';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
+const Line = styled.View`
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    background-color: #333;
+    color: #ccc;
+`
+const Title = styled.Text`
+color: #ccc;
+padding-right:5px;
+`
+const IconButton = styled.Text`
+    padding: 3px;
+`
 const Articles = props => {
     return (
-            <View key={props.n} style={styles.container}>
-                <Text
-                    onPress={() => props.star(props.n, props.news[props.n] )}
-                    style={styles.favourite}>keur
-                </Text>
-                <Text  style={props.darkMode} onPress={() => Linking.openURL(props.news[props.n])}>
+            <Line key={props.n}>
+                <Title onPress={() => Linking.openURL(props.news[props.n])}>
                     {props.n}
-                </Text>
-            </View>
+                </Title>
+                <IconButton
+                    onPress={() => props.star(props.n, props.news[props.n] )}
+                    ><Icon name="heart" />
+                </IconButton>
+            </Line>
     )
 }
 
-const styles = StyleSheet.create({
-    favourite: {
-        borderRadius: 4,
-        borderWidth: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'pink',
-        padding: 1
-    },
-    container: {
-        flexDirection:'row',
-        flexWrap:'wrap'
-    }
-})
+
 
 export default Articles;
